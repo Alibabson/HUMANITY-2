@@ -182,51 +182,75 @@ namespace HumanityWPF.ViewModel
             return renderBitmap;
         }
 
+        private ImageSource TryLoadImageByCandidates(string nameNoExt)
+        {
+            string assembly = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name ?? "UnknownAssembly";
+            string[] candidates = new[]
+            {
+                // jako osadzony Resource (pack URI)
+                $"pack://application:,,,/Assety/Grafika/{nameNoExt}.png",
+                // alternatywna forma z nazwą assembly
+                $"/{assembly};component/Assety/Grafika/{nameNoExt}.png",
+                // jako plik skopiowany do folderu wyjściowego (relative)
+                $"Assety/Grafika/{nameNoExt}.png",
+                // absolutna ścieżka do katalogu aplikacji (na wszelki wypadek)
+                System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assety", "Grafika", $"{nameNoExt}.png")
+            };
+
+            foreach (var candidate in candidates)
+            {
+                try
+                {
+                    Uri uri;
+                    // jeśli ścieżka wygląda jak lokalna ścieżka pliku, użyj UriKind.Absolute
+                    if (System.IO.Path.IsPathRooted(candidate))
+                        uri = new Uri(candidate, UriKind.Absolute);
+                    else
+                        uri = new Uri(candidate, UriKind.RelativeOrAbsolute);
+
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = uri;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+                    System.Diagnostics.Debug.WriteLine($"Loaded image: {candidate}");
+                    return bitmap;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"TryLoadImage failed for '{candidate}': {ex.Message}");
+                    // dalej próbuj następnego kandydata
+                }
+            }
+
+            return null;
+        }
+
         private ImageSource GetRoomImage(int roomIndex)
         {
-            string roomName = _gameModel.RoomName(roomIndex).Replace(" ", "");
+            string roomName = _gameModel.RoomName(roomIndex) ?? "Unknown";
+            // jeżeli pliki mają spacje, dostosuj zgodnie z rzeczywistymi nazwami plików
+            string cleaned = roomName.Replace(" ", "");
+            var img = TryLoadImageByCandidates(cleaned);
+            if (img != null) return img;
 
-
-            string imagePath = $"/Assety/Grafika/{roomName}.png";
-
-            try
-            {
-                var uri = new Uri(imagePath, UriKind.Relative);
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = uri;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                return bitmap;
-            }
-            catch (Exception ex)
-            {
-                // Jeśli nie ma obrazu, użyj placeholdera
-                System.Diagnostics.Debug.WriteLine($"Failed to load image: {imagePath} - {ex.Message}");
-                return CreatePlaceholderImage(roomName);
-            }
+            System.Diagnostics.Debug.WriteLine($"All image load attempts failed for room '{roomName}'. Returning placeholder.");
+            return CreatePlaceholderImage(roomName);
         }
 
         private ImageSource GetItemImage(string itemName)
         {
-            string cleanName = itemName.Replace(" ", "");
-            // Podobnie jak pokoje
-            string imagePath = $"/Assety/Grafika/{cleanName}.png";
+            if (string.IsNullOrWhiteSpace(itemName))
+                return CreatePlaceholderImage("UNKNOWN");
 
-            try
-            {
-                var uri = new Uri(imagePath, UriKind.Relative);
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = uri;
-                bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.EndInit();
-                return bitmap;
-            }
-            catch
-            {
-                return CreatePlaceholderImage(itemName.ToUpper());
-            }
+            string cleaned = itemName.Replace(" ", "");
+            var img = TryLoadImageByCandidates(cleaned);
+            if (img != null) return img;
+
+            System.Diagnostics.Debug.WriteLine($"All image load attempts failed for item '{itemName}'. Returning placeholder.");
+            return CreatePlaceholderImage(itemName.ToUpper());
         }
 
         // INotifyPropertyChanged implementation

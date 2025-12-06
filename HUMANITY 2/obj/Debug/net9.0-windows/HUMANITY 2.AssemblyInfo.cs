@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HUMANITY 2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93fd3de0aa790265ac162512f6522c8d9af11cdc")]
 [assembly: System.Reflection.AssemblyProductAttribute("HUMANITY 2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HUMANITY 2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
