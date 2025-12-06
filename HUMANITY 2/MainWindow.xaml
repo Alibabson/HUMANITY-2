@@ -1,0 +1,195 @@
+﻿<Window x:Class="HumanityWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HumanityWPF"
+        mc:Ignorable="d"
+        Title="HUMANITY" 
+        Height="800" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="Black"
+        WindowState="Maximized">
+
+    <Grid>
+        <!-- Główny layout: 3 rzędy (Górny panel, Obraz, Dolny panel) -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <!-- Górny panel -->
+            <RowDefinition Height="*"/>
+            <!-- Obraz (reszta miejsca) -->
+            <RowDefinition Height="250"/>
+            <!-- Dolny panel -->
+        </Grid.RowDefinitions>
+
+        <!-- GÓRNY PANEL: Pokój + Sanity -->
+        <Border Grid.Row="0" 
+                Background="#1a1a1a" 
+                BorderBrush="DarkRed" 
+                BorderThickness="0,0,0,2">
+            <Grid Margin="20,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Nazwa pokoju -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="CURRENT ROOM:" 
+                               FontSize="14" 
+                               FontWeight="Bold"
+                               Foreground="Gray"/>
+                    <TextBlock Text="{Binding CurrentRoomName}" 
+                               FontSize="28" 
+                               FontWeight="Bold"
+                               Foreground="Cyan"/>
+                </StackPanel>
+
+                <!-- Pasek Sanity -->
+                <StackPanel Grid.Column="1" 
+                            VerticalAlignment="Center" 
+                            Width="300">
+                    <TextBlock Text="SANITY:" 
+                               FontSize="14" 
+                               FontWeight="Bold"
+                               Foreground="Gray"
+                               HorizontalAlignment="Left"/>
+
+                    <Grid Margin="0,5,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Pasek postępu -->
+                        <Border Grid.Column="0"
+                                Background="#2a2a2a" 
+                                BorderBrush="Gray" 
+                                BorderThickness="2"
+                                CornerRadius="5"
+                                Height="30">
+                            <Grid>
+                                <!-- Wypełnienie paska -->
+                                <Border Background="{Binding SanityColor}"
+                                        HorizontalAlignment="Left"
+                                        CornerRadius="3">
+                                    <Border.Width>
+                                        <MultiBinding Converter="{StaticResource SanityWidthConverter}">
+                                            <Binding Path="SanityPercentage"/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=Border}" Path="ActualWidth"/>
+                                        </MultiBinding>
+                                    </Border.Width>
+                                </Border>
+
+                                <!-- Wartość sanity (tekst na środku) -->
+                                <TextBlock Text="{Binding SanityValue}" 
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- "/ 100" obok paska -->
+                        <TextBlock Grid.Column="1"
+                                   Text="/ 100" 
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="Gray"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ŚRODEK: Obraz pokoju/przedmiotu -->
+        <Border Grid.Row="1" 
+                Background="Black"
+                BorderBrush="DarkRed" 
+                BorderThickness="0,0,0,2">
+            <Image Source="{Binding CurrentImage}" 
+                   Stretch="Uniform"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        </Border>
+
+        <!-- DOLNY PANEL: Output + Input (styl RPG Maker) -->
+        <Border Grid.Row="2" 
+                Background="#0d0d0d"
+                Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Output text (scroll) -->
+                <ScrollViewer Grid.Row="0" 
+                              VerticalScrollBarVisibility="Auto"
+                              Margin="0,0,0,10">
+                    <TextBlock x:Name="OutputTextBlock"
+                               Text="{Binding OutputText}" 
+                               FontFamily="Consolas"
+                               FontSize="16"
+                               Foreground="LightGray"
+                               TextWrapping="Wrap"
+                               LineHeight="22"/>
+                </ScrollViewer>
+
+                <!-- Input pole + przyciski -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Pole tekstowe do komend -->
+                    <Border Grid.Column="0"
+                            Background="#1a1a1a"
+                            BorderBrush="DarkRed"
+                            BorderThickness="2"
+                            CornerRadius="5"
+                            Padding="10">
+                        <TextBox x:Name="InputTextBox"
+                                 Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                                 FontFamily="Consolas"
+                                 FontSize="18"
+                                 Foreground="Cyan"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 CaretBrush="Cyan"
+                                 KeyDown="InputTextBox_KeyDown"/>
+                    </Border>
+
+                    <!-- Przycisk ENTER -->
+                    <Button Grid.Column="1"
+                            Content="ENTER"
+                            Width="100"
+                            Height="45"
+                            Margin="10,0,0,0"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Background="DarkRed"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="EnterButton_Click"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="DarkRed"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

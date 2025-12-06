@@ -1,0 +1,22 @@
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\MainWindow.g.cs
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\App.g.cs
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2_MarkupCompile.cache
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2_MarkupCompile.lref
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\bin\Debug\net9.0-windows\HUMANITY 2.exe
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\bin\Debug\net9.0-windows\HUMANITY 2.deps.json
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\bin\Debug\net9.0-windows\HUMANITY 2.runtimeconfig.json
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\bin\Debug\net9.0-windows\HUMANITY 2.dll
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\bin\Debug\net9.0-windows\HUMANITY 2.pdb
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\App.baml
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\MainWindow.baml
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.g.resources
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.AssemblyInfoInputs.cache
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.AssemblyInfo.cs
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.csproj.CoreCompileInputs.cache
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.dll
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\refint\HUMANITY 2.dll
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.pdb
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\HUMANITY 2.genruntimeconfig.cache
+C:\Users\erykb\Desktop\Humanity 2\HUMANITY 2\obj\Debug\net9.0-windows\ref\HUMANITY 2.dll

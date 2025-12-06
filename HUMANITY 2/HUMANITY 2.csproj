@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <RootNamespace>HUMANITY_2</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assety\Grafika\BATHROOM.png" />
+    <None Remove="Assety\Grafika\HALLWAY.png" />
+    <None Remove="Assety\Grafika\KITCHEN.png" />
+    <None Remove="Assety\Grafika\LABORATORY.png" />
+    <None Remove="Assety\Grafika\LIBRARY.png" />
+    <None Remove="Assety\Grafika\LIVINGROOM.png" />
+    <None Remove="Assety\Grafika\STAIRS.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assety\Grafika\BATHROOM.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\HALLWAY.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\KITCHEN.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\LABORATORY.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\LIBRARY.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\LIVINGROOM.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\STAIRS.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
