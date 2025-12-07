@@ -2,8 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HumanityWPF"
-             StartupUri="MainWindow.xaml">
+             StartupUri="StartupWindow.xaml">
     <Application.Resources>
+        <!-- Rejestracja convertera -->
         <local:SanityWidthConverter x:Key="SanityWidthConverter"/>
     </Application.Resources>
 </Application>

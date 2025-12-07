@@ -1,42 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\",
+  "WorkspaceRootPath": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\viewmodel\\gameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:viewmodel\\gameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\startupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:startupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\model\\itemmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:model\\itemmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\soundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:soundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\model\\gamemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:model\\gamemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\sanitywidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:sanitywidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\controller\\wpfgamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\controller\\wpfgamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:controller\\wpfgamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\controller\\wpfitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\controller\\wpfitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:controller\\wpfitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\dell\\desktop\\humanity-2\\humanity 2\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\sanitywidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:sanitywidthconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\startupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:startupwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\viewmodel\\gameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:viewmodel\\gameviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\model\\itemmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:model\\itemmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\model\\gamemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:model\\gamemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\obj\\Debug\\net9.0-windows\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:obj\\Debug\\net9.0-windows\\MainWindow.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|c:\\users\\erykb\\desktop\\humanity-2\\humanity 2\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE8BEF4D-FD29-43A8-BC16-C23A89C3067F}|HUMANITY 2.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,118 +66,180 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SoundManager.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\SoundManager.cs",
+              "RelativeDocumentMoniker": "SoundManager.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\SoundManager.cs",
+              "RelativeToolTip": "SoundManager.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T19:41:25.112Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SanityWidthConverter.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\SanityWidthConverter.cs",
-              "RelativeDocumentMoniker": "SanityWidthConverter.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\SanityWidthConverter.cs",
-              "RelativeToolTip": "SanityWidthConverter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "StartupWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\StartupWindow.xaml.cs",
+              "RelativeDocumentMoniker": "StartupWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\StartupWindow.xaml.cs",
+              "RelativeToolTip": "StartupWindow.xaml.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAiwFYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:23:59.347Z"
+              "WhenOpened": "2025-12-07T19:29:48.114Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "StartupWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\StartupWindow.xaml",
+              "RelativeDocumentMoniker": "StartupWindow.xaml",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\StartupWindow.xaml",
+              "RelativeToolTip": "StartupWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-07T19:29:25.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MainWindow.g.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\obj\\Debug\\net9.0-windows\\MainWindow.g.cs",
+              "RelativeDocumentMoniker": "obj\\Debug\\net9.0-windows\\MainWindow.g.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\obj\\Debug\\net9.0-windows\\MainWindow.g.cs",
+              "RelativeToolTip": "obj\\Debug\\net9.0-windows\\MainWindow.g.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAowEIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T18:00:18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T09:21:24.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SanityWidthConverter.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\SanityWidthConverter.cs",
+              "RelativeDocumentMoniker": "SanityWidthConverter.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\SanityWidthConverter.cs",
+              "RelativeToolTip": "SanityWidthConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T15:23:59.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "GameViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\ViewModel\\GameViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\ViewModel\\GameViewModel.cs",
               "RelativeDocumentMoniker": "ViewModel\\GameViewModel.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\ViewModel\\GameViewModel.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\ViewModel\\GameViewModel.cs",
               "RelativeToolTip": "ViewModel\\GameViewModel.cs",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAEwPQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAH8AAAAAAAAAAAA8wBQAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-04T15:11:58.239Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "ItemModel.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Model\\ItemModel.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Model\\ItemModel.cs",
               "RelativeDocumentMoniker": "Model\\ItemModel.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Model\\ItemModel.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Model\\ItemModel.cs",
               "RelativeToolTip": "Model\\ItemModel.cs",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAcwFoBAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAewE4AAACzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:09:16.491Z"
+              "WhenOpened": "2025-12-04T15:09:16.491Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "GameModel.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Model\\GameModel.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Model\\GameModel.cs",
               "RelativeDocumentMoniker": "Model\\GameModel.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Model\\GameModel.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Model\\GameModel.cs",
               "RelativeToolTip": "Model\\GameModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAACwCAAAAAAAAAAD4v6QCAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T15:09:11.143Z"
+              "WhenOpened": "2025-12-04T15:09:11.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-04T14:38:58.199Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\App.xaml",
-              "RelativeToolTip": "App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-04T14:39:44.619Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "WPFGameController.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Controller\\WPFGameController.cs",
-              "RelativeDocumentMoniker": "Controller\\WPFGameController.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Controller\\WPFGameController.cs",
-              "RelativeToolTip": "Controller\\WPFGameController.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAcwFMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T11:05:16.957Z"
+              "WhenOpened": "2025-12-04T14:38:58.199Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "WPFItemController.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Controller\\WPFItemController.cs",
-              "RelativeDocumentMoniker": "Controller\\WPFItemController.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\Controller\\WPFItemController.cs",
-              "RelativeToolTip": "Controller\\WPFItemController.cs",
-              "ViewState": "AgIAAFICAAAAAAAAAAAcwGYCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-06T11:33:59.321Z"
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-04T14:39:44.619Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
+              "Title": "WPFGameController.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Controller\\WPFGameController.cs",
+              "RelativeDocumentMoniker": "Controller\\WPFGameController.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Controller\\WPFGameController.cs*",
+              "RelativeToolTip": "Controller\\WPFGameController.cs*",
+              "ViewState": "AgIAAOwCAAAAAAAAAAAwwPsCAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T11:05:16.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WPFItemController.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Controller\\WPFItemController.cs",
+              "RelativeDocumentMoniker": "Controller\\WPFItemController.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\Controller\\WPFItemController.cs",
+              "RelativeToolTip": "Controller\\WPFItemController.cs",
+              "ViewState": "AgIAAIgCAAAAAAAAAAAAAKUCAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T11:33:59.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\DELL\\Desktop\\Humanity-2\\HUMANITY 2\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\erykb\\Desktop\\HUMANITY-2\\HUMANITY 2\\MainWindow.xaml.cs",
               "RelativeToolTip": "MainWindow.xaml.cs",
               "ViewState": "AgIAAEAAAAAAAAAAAAAcwFQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

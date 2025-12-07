@@ -1,0 +1,78 @@
+﻿<Window x:Class="HumanityWPF.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HUMANITY" 
+        Height="800" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="Black"
+        WindowStyle="None"
+        WindowState="Maximized"
+        KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded">
+
+    <Grid>
+        <!-- Główny tytuł -->
+        <Viewbox Height="200" VerticalAlignment="Center" Margin="0,-100,0,0">
+            <TextBlock x:Name="TitleText" 
+                       Text=""
+                       FontFamily="Arial Black"
+                       FontSize="120"
+                       FontWeight="Bold"
+                       Foreground="DarkRed"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Opacity="0">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Red" 
+                                      BlurRadius="30" 
+                                      ShadowDepth="0"
+                                      Opacity="0.8"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Viewbox>
+
+        <!-- Subtitle -->
+        <StackPanel VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,150"
+                    Opacity="0"
+                    x:Name="SubtitlePanel">
+            <TextBlock Text="new version of a hit game HUMANITY"
+                       FontFamily="Georgia"
+                       FontSize="22"
+                       FontStyle="Italic"
+                       Foreground="#888888"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+            <TextBlock Text="made by OnyxMoonShine Studios"
+                       FontFamily="Georgia"
+                       FontSize="18"
+                       FontStyle="Italic"
+                       Foreground="#666666"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Press any key -->
+        <TextBlock x:Name="PressKeyText"
+                   Text="press any key to continue..."
+                   FontFamily="Consolas"
+                   FontSize="20"
+                   Foreground="Gray"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,50"
+                   Opacity="0">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                           From="0.3" To="1.0" Duration="0:0:1.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Grid>
+</Window>

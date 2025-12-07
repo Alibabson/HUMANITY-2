@@ -11,18 +11,57 @@
 
   <ItemGroup>
     <None Remove="Assety\Grafika\BATHROOM.png" />
+    <None Remove="Assety\Grafika\BEDROOM.png" />
+    <None Remove="Assety\Grafika\BOOKSHELF.png" />
+    <None Remove="Assety\Grafika\CABINET.png" />
+    <None Remove="Assety\Grafika\CLOCK.png" />
+    <None Remove="Assety\Grafika\DIARY.png" />
+    <None Remove="Assety\Grafika\FLOOR.png" />
     <None Remove="Assety\Grafika\HALLWAY.png" />
     <None Remove="Assety\Grafika\KITCHEN.png" />
     <None Remove="Assety\Grafika\LABORATORY.png" />
     <None Remove="Assety\Grafika\LIBRARY.png" />
     <None Remove="Assety\Grafika\LIVINGROOM.png" />
+    <None Remove="Assety\Grafika\MIRROR.png" />
+    <None Remove="Assety\Grafika\MONITOR.png" />
+    <None Remove="Assety\Grafika\MUSICBOX.png" />
     <None Remove="Assety\Grafika\NEWSPAPER.png" />
+    <None Remove="Assety\Grafika\OFFICE.png" />
+    <None Remove="Assety\Grafika\PHOTO.png" />
     <None Remove="Assety\Grafika\PIANO.png" />
     <None Remove="Assety\Grafika\STAIRS.png" />
+    <None Remove="Assety\Grafika\TABLE.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assety\Grafika\MONITOR.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assety\Grafika\CABINET.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assety\Grafika\BATHROOM.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\BEDROOM.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\BOOKSHELF.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\CLOCK.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\DIARY.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\FLOOR.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assety\Grafika\HALLWAY.png">
@@ -40,13 +79,28 @@
     <Resource Include="Assety\Grafika\LIVINGROOM.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assety\Grafika\MIRROR.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\MUSICBOX.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assety\Grafika\newspaper.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\OFFICE.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\PHOTO.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assety\Grafika\PIANO.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assety\Grafika\STAIRS.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\TABLE.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

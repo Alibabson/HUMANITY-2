@@ -17,7 +17,7 @@ namespace HumanityWPF.Controller
         private int nextRoomIdx;
 
         // Stan interakcji - co aktualnie robimy
-        private string _currentInteractionMode = "";
+        private string _currentInteractionMode = ""; // "" = normalny, "terminal", "whiteboard", "bookshelf", etc.
         private string _currentItem = "";
 
         public WPFGameController(GameViewModel viewModel)
@@ -110,7 +110,7 @@ namespace HumanityWPF.Controller
 
                 case "check":
                     _viewModel.ClearOutput();
-                    
+                  //  SoundManager.PlayItemCheck(); // Dźwięk sprawdzania przedmiotu
                     await HandleCheckCommand(argument);
                     break;
 
@@ -155,9 +155,8 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-
+            _viewModel.UpdateItemDisplay(item);
             _currentItem = item;
-            _viewModel.UpdateItemDisplay(item.ToUpper());
 
             // Obsługa specjalnych przedmiotów
             switch (item.ToLower())
@@ -165,7 +164,6 @@ namespace HumanityWPF.Controller
                 case "floor":
                     if (idx == 1)
                     {
-                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         await _itemController.KeyAsync(desc);
                         _viewModel.UpdateRoomDisplay(1);
                         LookFunction("");
@@ -177,7 +175,6 @@ namespace HumanityWPF.Controller
                 case "terminal":
                     if (idx == 0)
                     {
-                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         await _itemController.Monitor(desc);
                         _currentInteractionMode = "terminal";
                     }
@@ -188,17 +185,13 @@ namespace HumanityWPF.Controller
                     {
                         _itemController.Whiteboard(desc);
                         _currentInteractionMode = "whiteboard_menu";
-                        //LookFunction("");
                     }
                     break;
 
                 case "newspaper":
                     if (idx == 4)
                     {
-                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         await _itemController.Newspaper(desc);
-                        LookFunction("");
-
                     }
                     break;
 
@@ -214,14 +207,12 @@ namespace HumanityWPF.Controller
                     if (idx == 3)
                     {
                         await _itemController.Table(desc);
-                        LookFunction("");
                     }
                     break;
 
                 case "piano":
                     if (idx == 2)
                     {
-                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         _itemController.Piano(desc);
                         if (!_model.hasDiaryKey)
                         {
@@ -234,7 +225,6 @@ namespace HumanityWPF.Controller
                     if (idx == 2)
                     {
                         await _itemController.Clock(desc);
-                        LookFunction("");
                     }
                     break;
 
@@ -509,7 +499,6 @@ namespace HumanityWPF.Controller
             {
                 _itemController.Bookshelf(_model.checkItem(3, "bookshelf"));
                 _currentInteractionMode = "bookshelf";
-                _viewModel.ClearOutput();
             }
             else
             {
@@ -528,8 +517,7 @@ namespace HumanityWPF.Controller
             if (_itemController.PianoCheckSequence(input))
             {
                 _currentInteractionMode = "";
-                if(_model.hasDiaryKey) _viewModel.UpdateRoomDisplay(_model.room_idx);
-                LookFunction("");
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
         }
 
@@ -745,7 +733,7 @@ namespace HumanityWPF.Controller
             }
             else
             {
-                _viewModel.AppendOutput("\n❌ You can't go to that room from here.\n");
+                _viewModel.AppendOutput("❌ You can't go to that room from here.\n");
             }
         }
 
@@ -754,6 +742,9 @@ namespace HumanityWPF.Controller
             _model.GoTo_Possible(nextRoomIdx);
             _viewModel.ClearOutput();
             _viewModel.AppendOutput($"➡️  You move to the {_model.RoomName(nextRoomIdx)}.\n");
+
+           // SoundManager.PlayRoomTransition(); // Dźwięk zmiany pokoju
+
             RandomGhost();
             _viewModel.UpdateRoomDisplay(nextRoomIdx);
             LookFunction("");
@@ -770,11 +761,19 @@ namespace HumanityWPF.Controller
                 int ghostIndex = rng.Next(_model.Ghosts.Count);
                 string ghostMessage = _model.Ghosts[ghostIndex];
                 _viewModel.AppendOutput($"\n👻 {ghostMessage.Replace("\n", " ")}\n");
+
+                //SoundManager.PlayGhostAppear(); // Dźwięk ducha
+
                 _model.sanity = Math.Max(0, _model.sanity - 10);
             }
             else
             {
                 _model.sanity = Math.Max(0, _model.sanity - 5);
+            }
+
+            if (_model.sanity < _viewModel.SanityValue) // Sanity spadło
+            {
+               // SoundManager.PlaySanityDrop();
             }
 
             _viewModel.SanityValue = _model.sanity;
@@ -787,7 +786,7 @@ namespace HumanityWPF.Controller
                 _viewModel.AppendOutput("❌ LOOK command does not take arguments.\n");
                 return;
             }
-
+            _viewModel.ClearOutput();
             idx = _model.room_idx;
 
             if (_model.LookedRoom[idx])

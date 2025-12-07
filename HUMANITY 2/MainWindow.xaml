@@ -10,7 +10,8 @@
         Width="1400"
         WindowStartupLocation="CenterScreen"
         Background="#050505"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        WindowStyle="None">
 
     <Window.Resources>
         <!-- Efekt świecenia dla tekstu -->

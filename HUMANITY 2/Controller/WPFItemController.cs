@@ -60,15 +60,15 @@ namespace HumanityWPF.Controller
         {
             _viewModel.ClearOutput();
             _viewModel.AppendOutput("=== TERMINAL MENU ===\n");
-            _viewModel.AppendOutput("1. CHECK CURRENT PATIENT STATUS");
-            _viewModel.AppendOutput("2. OPEN TEST LOGS");
+            _viewModel.AppendOutput("1. CHECK CURRENT PATIENT STATUS\n");
+            _viewModel.AppendOutput("2. OPEN TEST LOGS\n");
 
             if (_model.Reason && _model.Emotion && _model.Morality)
             {
-                _viewModel.AppendOutput("3. RESTORE HUMANITY");
+                _viewModel.AppendOutput("3. RESTORE HUMANITY\n");
             }
 
-            _viewModel.AppendOutput("4. QUIT TERMINAL");
+            _viewModel.AppendOutput("4. QUIT TERMINAL\n");
             _viewModel.AppendOutput("\nType the number (1-4) to select option.\n");
         }
 
@@ -117,8 +117,8 @@ namespace HumanityWPF.Controller
         public void MonitorOption3() // Restore Humanity - ENDING
         {
             _viewModel.ClearOutput();
-            _viewModel.AppendOutput("⚠️  WARNING: This action is IRREVERSIBLE.");
-            _viewModel.AppendOutput("\nDo you wish to restore your HUMANITY?");
+            _viewModel.AppendOutput("⚠️  WARNING: This action is IRREVERSIBLE.\n");
+            _viewModel.AppendOutput("\nDo you wish to restore your HUMANITY?\n");
             _viewModel.AppendOutput("This will erase everything.\n");
             _viewModel.AppendOutput("Type 'yes' to proceed or 'no' to cancel.\n");
         }
@@ -281,7 +281,7 @@ namespace HumanityWPF.Controller
             {
                 _viewModel.AppendOutput(CleanMarkup(s));
             }
-
+            _viewModel.UpdateItemDisplay(_itemModel.Fragment[0]);
             _viewModel.AppendOutput("\n\nType the missing word to obtain the fragment:");
         }
 
@@ -484,6 +484,7 @@ namespace HumanityWPF.Controller
             {
                 _viewModel.AppendOutput(CleanMarkup(text[0]));
                 _viewModel.AppendOutput(CleanMarkup(text[1]));
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
             else if (!_model.hasRing)
             {
@@ -493,6 +494,7 @@ namespace HumanityWPF.Controller
             else
             {
                 _viewModel.AppendOutput("You already took the ring.");
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
         }
 
@@ -516,6 +518,7 @@ namespace HumanityWPF.Controller
             if (diaryOpened)
             {
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.DiaryAddons[0]));
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
                 return;
             }
 
@@ -527,6 +530,7 @@ namespace HumanityWPF.Controller
                     _viewModel.AppendOutput(CleanMarkup(l));
                 }
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.DiaryAddons[1]));
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
                 return;
             }
 
@@ -552,6 +556,7 @@ namespace HumanityWPF.Controller
 
         public void DiaryAnswer()
         {
+            _viewModel.UpdateItemDisplay(_itemModel.Fragment[1]);
             _viewModel.AppendOutput("\nType the missing word to obtain the fragment:");
         }
 
@@ -622,6 +627,7 @@ namespace HumanityWPF.Controller
         {
             if (code == "1967")
             {
+                _viewModel.UpdateItemDisplay(_itemModel.Fragment[2]);
                 _viewModel.AppendOutput("\nType the missing word to obtain the final fragment:");
                 return true;
             }

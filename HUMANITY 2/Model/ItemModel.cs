@@ -270,9 +270,9 @@
         ////Fragmenty Człowieczeństwa
         public List<string> Fragment = new List<string>()
         {
-           "[red]A mind without ______ is a room without light.[/]\n",
-           "[red]A heart without _______ is a voice without sound.[/]\n",
-           "[red]A choice without ________ is a road without direction.[/]\n"
+           "A mind without\n \n______ \n\nis a room without light.\n",
+           "A heart without \n\n_______ \n\nis a voice without sound.\n",
+           "A choice without \n\n________\n\n is a road without direction.\n"
         };
 
         public string ShowNotes()

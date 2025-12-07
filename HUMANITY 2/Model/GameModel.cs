@@ -674,10 +674,10 @@
         public List<string> Status()
         {
             statusLines.Clear();
-            statusLines.Add("[lime bold]SYSTEM STATUS:[/]");
-            statusLines.Add($"[lime]- REASON: {(Reason ? "ONLINE[/]" : "[/][red]OFFLINE[/]")}");
-            statusLines.Add($"[lime]- EMOTION: {(Emotion ? "ONLINE[/]" : "[/][red]OFFLINE[/]")}");
-            statusLines.Add($"[lime]- MORALITY: {(Morality ? "ONLINE[/]" : "[/][red]OFFLINE[/]")}");
+            statusLines.Add("[lime bold]SYSTEM STATUS:[/]\n");
+            statusLines.Add($"[lime]- REASON: {(Reason ? "ONLINE[/]\n" : "[/][red]OFFLINE[/]\n")}");
+            statusLines.Add($"[lime]- EMOTION: {(Emotion ? "ONLINE[/]\n" : "[/][red]OFFLINE[/]\n")}");
+            statusLines.Add($"[lime]- MORALITY: {(Morality ? "ONLINE[/]\n" : "[/][red]OFFLINE[/]\n")}");
             return statusLines;
         }
 
