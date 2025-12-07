@@ -11,15 +11,21 @@ namespace HumanityWPF.Controller
         private readonly GameViewModel _viewModel;
         private readonly GameModel _model;
         private readonly ItemModel _itemModel;
-        private bool _running = true;
+        private readonly WPFItemController _itemController;
+
         private int idx;
         private int nextRoomIdx;
+
+        // Stan interakcji - co aktualnie robimy
+        private string _currentInteractionMode = ""; // "" = normalny, "terminal", "whiteboard", "bookshelf", etc.
+        private string _currentItem = "";
 
         public WPFGameController(GameViewModel viewModel)
         {
             _viewModel = viewModel;
             _model = viewModel.GameModel;
             _itemModel = viewModel.ItemModel;
+            _itemController = new WPFItemController(viewModel, _model, _itemModel);
         }
 
         public async Task Run()
@@ -28,40 +34,48 @@ namespace HumanityWPF.Controller
 
             if (!_model.IntroPlayed)
             {
-                // Intro - uproszczone dla WPF
                 await ShowIntro();
                 _model.IntroPlayed = true;
             }
 
-            // Pokaż help
             _viewModel.AppendOutput(Help());
             _viewModel.AppendOutput("");
-
-            // Pokaż pierwszy pokój
             LookFunction("");
         }
 
         private async Task ShowIntro()
         {
-            // Animowane intro (uproszczone)
+            // Ukryj obraz na czas intro
+            _viewModel.CurrentImage = null;
+
             foreach (var line in _model.Prologue)
             {
-                _viewModel.AppendOutput(line.Text);
-                await Task.Delay(100); // Szybsze dla WPF
+                _viewModel.AppendOutput(CleanMarkup(line.Text));
+                await Task.Delay(50);
             }
 
-            _viewModel.AppendOutput("\n[Press ENTER to continue...]");
-            await Task.Delay(2000);
+            await _viewModel.WaitForKeyPress();
             _viewModel.ClearOutput();
+
+            // Przywróć obraz pokoju
+            _viewModel.UpdateRoomDisplay(0);
         }
 
-        public void HandleInput(string input)
+        public async void HandleInput(string input)
         {
-            var command = "";
-            var argument = "";
             var inputLower = (input ?? "").Trim().ToLowerInvariant();
 
-            // Obsługa "GO TO"
+            // Jeśli jesteśmy w trybie interakcji, przekaż do odpowiedniej funkcji
+            if (!string.IsNullOrEmpty(_currentInteractionMode))
+            {
+                await HandleInteractionInput(inputLower);
+                return;
+            }
+
+            // Normalne komendy
+            var command = "";
+            var argument = "";
+
             if (inputLower.StartsWith("go to "))
             {
                 string room = inputLower.Substring("go to ".Length).Trim();
@@ -77,32 +91,33 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            // Rozdzielenie komendy i argumentu
             var parts = inputLower.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
             command = parts.Length > 0 ? parts[0] : "";
             argument = parts.Length > 1 ? parts[1] : "";
 
-            // Przetwarzanie komend
             switch (command)
             {
                 case "help":
-                    _viewModel.ClearOutput(); // Czyścimy przed pokazaniem HELP
+                    _viewModel.ClearOutput();
                     _viewModel.AppendOutput(Help());
                     break;
 
                 case "look":
+                    _viewModel.ClearOutput();
                     _model.LookedRoom[_model.room_idx] = true;
                     LookFunction(argument);
                     break;
 
                 case "check":
-                    HandleCheckCommand(argument);
+                    _viewModel.ClearOutput();
+                    await HandleCheckCommand(argument);
                     break;
 
                 case "use":
                     if (_model.hasDevice && argument == "device" && _model.room_idx == 0)
                     {
-                        DestroyDevice();
+                        _itemController.Destroy();
+                        _currentInteractionMode = "device_destroy";
                     }
                     else
                     {
@@ -122,7 +137,7 @@ namespace HumanityWPF.Controller
             }
         }
 
-        private void HandleCheckCommand(string item)
+        private async Task HandleCheckCommand(string item)
         {
             if (string.IsNullOrEmpty(item))
             {
@@ -139,30 +154,18 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            // Zmień obraz na przedmiot
             _viewModel.UpdateItemDisplay(item);
+            _currentItem = item;
 
-            // Wyświetl opis przedmiotu
-            foreach (var line in desc)
-            {
-                // Usunięcie Spectre markup tags (np. [lime], [/])
-                string cleanLine = System.Text.RegularExpressions.Regex.Replace(line, @"\[.*?\]", "");
-                _viewModel.AppendOutput(cleanLine);
-            }
-
-            // Specjalna obsługa niektórych przedmiotów
-            HandleSpecialItems(item);
-        }
-
-        private void HandleSpecialItems(string item)
-        {
+            // Obsługa specjalnych przedmiotów
             switch (item.ToLower())
             {
                 case "floor":
-                    if (idx == 1 && !_model.hasKey)
+                    if (idx == 1)
                     {
-                        _model.hasKey = true;
-                        _viewModel.AppendOutput("\n🔑 You found a KEY!\n");
+                        await _itemController.KeyAsync(desc);
+                        _viewModel.UpdateRoomDisplay(1);
+                        LookFunction("");
                     }
                     break;
 
@@ -171,39 +174,523 @@ namespace HumanityWPF.Controller
                 case "terminal":
                     if (idx == 0)
                     {
-                        ShowTerminalMenu();
+                        await _itemController.Monitor(desc);
+                        _currentInteractionMode = "terminal";
+                    }
+                    break;
+
+                case "whiteboard":
+                    if (idx == 0)
+                    {
+                        _itemController.Whiteboard(desc);
+                        _currentInteractionMode = "whiteboard_menu";
+                    }
+                    break;
+
+                case "newspaper":
+                    if (idx == 4)
+                    {
+                        _itemController.Newspaper(desc);
+                    }
+                    break;
+
+                case "bookshelf":
+                    if (idx == 3)
+                    {
+                        _itemController.Bookshelf(desc);
+                        _currentInteractionMode = "bookshelf";
+                    }
+                    break;
+
+                case "table":
+                    if (idx == 3)
+                    {
+                        _itemController.Table(desc);
+                    }
+                    break;
+
+                case "piano":
+                    if (idx == 2)
+                    {
+                        _itemController.Piano(desc);
+                        if (!_model.hasDiaryKey)
+                        {
+                            _currentInteractionMode = "piano";
+                        }
+                    }
+                    break;
+
+                case "clock":
+                    if (idx == 2)
+                    {
+                        _itemController.Clock(desc);
+                    }
+                    break;
+
+                case "photo":
+                case "picture":
+                    if (idx == 5)
+                    {
+                        _itemController.Photo(desc);
+                        if (_model.KnowsSafeLocation && !_model.SafeOpened)
+                        {
+                            _currentInteractionMode = "photo_safe_prompt";
+                        }
+                    }
+                    break;
+
+                case "mirror":
+                    if (idx == 6)
+                    {
+                        _itemController.Mirror(desc);
+                        _currentInteractionMode = "mirror";
+                    }
+                    break;
+
+                case "cabinet":
+                    if (idx == 6)
+                    {
+                        _itemController.Cabinet(desc);
+                        if (!_model.hasMusicBoxKey)
+                        {
+                            _currentInteractionMode = "cabinet";
+                        }
+                    }
+                    break;
+
+                case "music":
+                case "musicbox":
+                case "music box":
+                    if (idx == 7)
+                    {
+                        _itemController.MusicBox(desc);
+                        if (_model.hasMusicBoxKey && !_model.hasRing)
+                        {
+                            _currentInteractionMode = "musicbox";
+                        }
+                    }
+                    break;
+
+                case "diary":
+                    if (idx == 7)
+                    {
+                        _itemController.Diary(desc);
+                        if (_model.hasDiaryKey && !_itemController.IsDiaryOpened())
+                        {
+                            _currentInteractionMode = "diary";
+                        }
+                    }
+                    break;
+
+                case "desk":
+                    if (idx == 8)
+                    {
+                        _itemController.Desk(desc);
+                        _currentInteractionMode = "desk";
+                    }
+                    break;
+
+                default:
+                    // Zwykły przedmiot - tylko opis
+                    foreach (var line in desc)
+                    {
+                        _viewModel.AppendOutput(CleanMarkup(line));
                     }
                     break;
             }
         }
 
-        private void ShowTerminalMenu()
+        private async Task HandleInteractionInput(string input)
         {
-            _viewModel.AppendOutput("\n=== TERMINAL MENU ===");
-            _viewModel.AppendOutput("1. CHECK CURRENT PATIENT STATUS");
-            _viewModel.AppendOutput("2. OPEN TEST LOGS");
-            if (_model.Reason && _model.Emotion && _model.Morality)
+            switch (_currentInteractionMode)
             {
-                _viewModel.AppendOutput("3. RESTORE HUMANITY");
+                case "terminal":
+                    await HandleTerminalInput(input);
+                    break;
+
+                case "terminal_logs":
+                    HandleTerminalLogsInput(input);
+                    break;
+
+                case "terminal_ending":
+                    await HandleTerminalEndingInput(input);
+                    break;
+
+                case "whiteboard_menu":
+                    HandleWhiteboardMenuInput(input);
+                    break;
+
+                case "whiteboard_solving":
+                    HandleWhiteboardSolvingInput(input);
+                    break;
+
+                case "bookshelf":
+                    HandleBookshelfInput(input);
+                    break;
+
+                case "bookshelf_poem":
+                    HandleBookshelfPoemInput(input);
+                    break;
+
+                case "piano":
+                    HandlePianoInput(input);
+                    break;
+
+                case "photo_safe_prompt":
+                    HandlePhotoSafePromptInput(input);
+                    break;
+
+                case "safe":
+                    HandleSafeInput(input);
+                    break;
+
+                case "mirror":
+                    HandleMirrorInput(input);
+                    break;
+
+                case "cabinet":
+                    HandleCabinetInput(input);
+                    break;
+
+                case "musicbox":
+                    HandleMusicBoxInput(input);
+                    break;
+
+                case "diary":
+                    HandleDiaryInput(input);
+                    break;
+
+                case "desk":
+                    HandleDeskInput(input);
+                    break;
+
+                case "device_destroy":
+                    await HandleDeviceDestroyInput(input);
+                    break;
+
+                case "device_code":
+                    HandleDeviceCodeInput(input);
+                    break;
+
+                case "device_final":
+                    HandleDeviceFinalInput(input);
+                    break;
             }
-            _viewModel.AppendOutput("\nType the number or command name.\n");
         }
 
-        private void DestroyDevice()
+        // ===== TERMINAL =====
+        private async Task HandleTerminalInput(string input)
         {
-            if (!_model.DEVICE)
+            if (input == "1")
             {
-                _viewModel.AppendOutput("💥 Device activated! Data erasing...");
-                _model.DEVICE = true;
+                _itemController.MonitorOption1();
+                // Pozostajemy w trybie terminal, czekamy na "back"
+            }
+            else if (input == "2")
+            {
+                _itemController.MonitorOption2();
+                _currentInteractionMode = "terminal_logs";
+            }
+            else if (input == "3" && _model.Reason && _model.Emotion && _model.Morality)
+            {
+                _itemController.MonitorOption3();
+                _currentInteractionMode = "terminal_ending";
+            }
+            else if (input == "4" || input == "back" || input == "quit")
+            {
+                _currentInteractionMode = "";
+                _viewModel.ClearOutput();
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        private void HandleTerminalLogsInput(string input)
+        {
+            if (input == "next page")
+            {
+                int page = _itemController.GetCurrentLogPage() + 1;
+                if (page <= 5) _itemController.ShowLogPage(page);
+            }
+            else if (input == "prev page")
+            {
+                int page = _itemController.GetCurrentLogPage() - 1;
+                if (page >= 1) _itemController.ShowLogPage(page);
+            }
+            else if (input == "back")
+            {
+                _itemController.MonitorOption1(); // Powrót do menu
+                _currentInteractionMode = "terminal";
+            }
+        }
+
+        private async Task HandleTerminalEndingInput(string input)
+        {
+            if (input == "yes")
+            {
+                await _itemController.ShowGoodEnding();
+            }
+            else if (input == "no")
+            {
+                await _itemController.ShowBadEnding();
+            }
+        }
+
+        // ===== WHITEBOARD =====
+        private void HandleWhiteboardMenuInput(string input)
+        {
+            if (input == "solve")
+            {
+                _itemController.WhiteboardSolve();
+                _currentInteractionMode = "whiteboard_solving";
+            }
+            else if (input == "leave" || input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        private void HandleWhiteboardSolvingInput(string input)
+        {
+            if (_itemController.WhiteboardCheckAnswer(input))
+            {
+                _currentInteractionMode = "";
+                // Powrót do pokoju
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+        }
+
+        // ===== BOOKSHELF =====
+        private void HandleBookshelfInput(string input)
+        {
+            if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+                return;
+            }
+
+            var parts = input.Split(' ', 2);
+            if (parts.Length == 2 && int.TryParse(parts[0], out int row) && int.TryParse(parts[1], out int col))
+            {
+                var desc = _model.checkItem(3, "bookshelf");
+                _itemController.BookshelfCoordinates(row, col, desc);
+
+                if (row == 9 && col == 5)
+                {
+                    _currentInteractionMode = "bookshelf_poem";
+                }
+            }
+        }
+
+        private void HandleBookshelfPoemInput(string input)
+        {
+            if (input == "read")
+            {
+                var desc = _model.checkItem(3, "bookshelf");
+                _itemController.Poem(desc);
+                // Teraz czekamy na odpowiedź
+            }
+            else if (input == "back")
+            {
+                _itemController.Bookshelf(_model.checkItem(3, "bookshelf"));
+                _currentInteractionMode = "bookshelf";
             }
             else
             {
-                _viewModel.AppendOutput("You already used the device.");
+                // Odpowiedź na zagadkę
+                if (_itemController.PoemCheckAnswer(input))
+                {
+                    _currentInteractionMode = "";
+                    _viewModel.UpdateRoomDisplay(_model.room_idx);
+                }
             }
-
-            LookFunction("");
         }
 
+        // ===== PIANO =====
+        private void HandlePianoInput(string input)
+        {
+            if (_itemController.PianoCheckSequence(input))
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+        }
+
+        // ===== PHOTO & SAFE =====
+        private void HandlePhotoSafePromptInput(string input)
+        {
+            if (input == "open safe")
+            {
+                var desc = _model.checkItem(5, "safe");
+                _itemController.Safe(desc);
+                _currentInteractionMode = "safe";
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        private void HandleSafeInput(string input)
+        {
+            if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+            else if (_itemController.SafeCheckPassword(input))
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+        }
+
+        // ===== MIRROR =====
+        private void HandleMirrorInput(string input)
+        {
+            if (input == "read note")
+            {
+                var desc = _model.checkItem(6, "mirror");
+                _itemController.Note(desc[5]);
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        // ===== CABINET =====
+        private void HandleCabinetInput(string input)
+        {
+            if (input == "search")
+            {
+                var desc = _model.checkItem(6, "cabinet");
+                _itemController.CabinetSearch(desc);
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        // ===== MUSIC BOX =====
+        private void HandleMusicBoxInput(string input)
+        {
+            if (input == "open")
+            {
+                var desc = _model.checkItem(7, "music box");
+                _itemController.MusicBoxOpen(desc);
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        // ===== DIARY =====
+        private void HandleDiaryInput(string input)
+        {
+            if (input == "next page")
+            {
+                int page = _itemController.GetCurrentDiaryPage() + 1;
+                if (page <= 5) _itemController.ShowDiaryPage(page);
+            }
+            else if (input == "prev page")
+            {
+                int page = _itemController.GetCurrentDiaryPage() - 1;
+                if (page >= 1) _itemController.ShowDiaryPage(page);
+            }
+            else if (input == "answer")
+            {
+                _itemController.DiaryAnswer();
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+            else
+            {
+                // Odpowiedź
+                if (_itemController.DiaryCheckAnswer(input))
+                {
+                    _currentInteractionMode = "";
+                    _viewModel.UpdateRoomDisplay(_model.room_idx);
+                }
+            }
+        }
+
+        // ===== DESK =====
+        private void HandleDeskInput(string input)
+        {
+            if (input == "desk")
+            {
+                _itemController.DeskCheck();
+            }
+            else if (input == "drawer")
+            {
+                _itemController.DrawerCheck();
+            }
+            else if (input == "back")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        // ===== DEVICE =====
+        private async Task HandleDeviceDestroyInput(string input)
+        {
+            if (input == "activate")
+            {
+                _itemController.DestroyActivate(_itemModel.DestroyList);
+                _currentInteractionMode = "device_code";
+            }
+            else if (input == "cancel")
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
+            }
+        }
+
+        private void HandleDeviceCodeInput(string input)
+        {
+            if (_itemController.DestroyCheckCode(input))
+            {
+                _currentInteractionMode = "device_final";
+            }
+        }
+
+        private void HandleDeviceFinalInput(string input)
+        {
+            if (_itemController.DestroyFinalAnswer(input))
+            {
+                _currentInteractionMode = "";
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+            }
+        }
+
+        // ===== POMOCNICZE =====
         private void CheckPossible(int nextRoomIdx)
         {
             int idx = _model.room_idx;
@@ -254,11 +741,7 @@ namespace HumanityWPF.Controller
         {
             _model.GoTo_Possible(nextRoomIdx);
             _viewModel.AppendOutput($"➡️  You move to the {_model.RoomName(nextRoomIdx)}.\n");
-
-            // Losowanie ducha
             RandomGhost();
-
-            // Aktualizacja wyświetlania
             _viewModel.UpdateRoomDisplay(nextRoomIdx);
             LookFunction("");
         }
@@ -273,7 +756,6 @@ namespace HumanityWPF.Controller
             {
                 int ghostIndex = rng.Next(_model.Ghosts.Count);
                 string ghostMessage = _model.Ghosts[ghostIndex];
-
                 _viewModel.AppendOutput($"\n👻 {ghostMessage.Replace("\n", " ")}\n");
                 _model.sanity = Math.Max(0, _model.sanity - 10);
             }
@@ -293,22 +775,23 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            // HUD usunięty - mamy go na górze ekranu!
             idx = _model.room_idx;
 
             if (_model.LookedRoom[idx])
             {
                 _model.pickLook(idx, 0);
-
-                _viewModel.AppendOutput(""); // Pusta linia
+                _viewModel.AppendOutput("");
                 foreach (string x in _model.look)
                 {
-                    // Usunięcie Spectre markup
-                    string clean = System.Text.RegularExpressions.Regex.Replace(x, @"\[.*?\]", "");
-                    _viewModel.AppendOutput(clean);
+                    _viewModel.AppendOutput(CleanMarkup(x));
                 }
-                _viewModel.AppendOutput(""); // Pusta linia na końcu
+                _viewModel.AppendOutput("");
             }
+        }
+
+        private string CleanMarkup(string text)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(text, @"\[.*?\]", "");
         }
 
         private string Help()

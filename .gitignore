@@ -190,3 +190,164 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
+*.db-shm
+*.vsidx
+*.db-wal
+*.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/1b6bda52-be95-4019-9b33-fd0d90498293.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/43c60c38-9c12-41ac-92d7-693a13a7986d.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/4df5564d-3440-4939-a0ed-927ba5b0442c.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/76d96157-8531-4316-a238-9dfb3a792897.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/d7bd71f5-32d5-41c2-a158-c7cb91419904.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/.suo
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.metadata.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.projects.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.strings.v9.bin
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.exe
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/apphost.exe
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfo.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfoInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.assets.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.CoreCompileInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.FileListAbsolute.txt
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.GeneratedMSBuildEditorConfig.editorconfig
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.genruntimeconfig.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.i.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.lref
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/ref/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/refint/HUMANITY 2.dll
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.dgspec.json
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.g.props
+HUMANITY 2/obj/project.assets.json
+HUMANITY 2/obj/project.nuget.cache
+/HUMANITY 2/.vs/HUMANITY 2/v17
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/CodeChunks.db
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/SemanticSymbols.db
+HUMANITY 2/.vs/HUMANITY 2/DesignTimeBuild/.dtbcache.v2
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/76d96157-8531-4316-a238-9dfb3a792897.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/d7bd71f5-32d5-41c2-a158-c7cb91419904.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/.futdcache.v2
+HUMANITY 2/.vs/HUMANITY 2/v17/.suo
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.backup.json
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.metadata.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.projects.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.strings.v9.bin
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.exe
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/apphost.exe
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfo.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfoInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.assets.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.CoreCompileInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.FileListAbsolute.txt
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.GeneratedMSBuildEditorConfig.editorconfig
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.genruntimeconfig.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.i.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.lref
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/ref/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/refint/HUMANITY 2.dll
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.dgspec.json
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.g.props
+HUMANITY 2/obj/project.assets.json
+HUMANITY 2/obj/project.nuget.cache
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/CodeChunks.db
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/SemanticSymbols.db
+HUMANITY 2/.vs/HUMANITY 2/DesignTimeBuild/.dtbcache.v2
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/1b6bda52-be95-4019-9b33-fd0d90498293.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/43c60c38-9c12-41ac-92d7-693a13a7986d.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/4df5564d-3440-4939-a0ed-927ba5b0442c.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/76d96157-8531-4316-a238-9dfb3a792897.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/d7bd71f5-32d5-41c2-a158-c7cb91419904.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/.futdcache.v2
+HUMANITY 2/.vs/HUMANITY 2/v17/.suo
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.backup.json
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.metadata.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.projects.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.strings.v9.bin
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/CodeChunks.db
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/SemanticSymbols.db
+HUMANITY 2/.vs/HUMANITY 2/DesignTimeBuild/.dtbcache.v2
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/1b6bda52-be95-4019-9b33-fd0d90498293.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/43c60c38-9c12-41ac-92d7-693a13a7986d.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/4df5564d-3440-4939-a0ed-927ba5b0442c.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/76d96157-8531-4316-a238-9dfb3a792897.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/d7bd71f5-32d5-41c2-a158-c7cb91419904.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/.futdcache.v2
+HUMANITY 2/.vs/HUMANITY 2/v17/.suo
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.backup.json
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.metadata.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.projects.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.strings.v9.bin
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.exe
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/CodeChunks.db
+HUMANITY 2/.vs/HUMANITY 2/CopilotIndices/17.14.1368.60722/SemanticSymbols.db
+HUMANITY 2/.vs/HUMANITY 2/DesignTimeBuild/.dtbcache.v2
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/1b6bda52-be95-4019-9b33-fd0d90498293.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/43c60c38-9c12-41ac-92d7-693a13a7986d.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/4df5564d-3440-4939-a0ed-927ba5b0442c.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/76d96157-8531-4316-a238-9dfb3a792897.vsidx
+HUMANITY 2/.vs/HUMANITY 2/FileContentIndex/d7bd71f5-32d5-41c2-a158-c7cb91419904.vsidx
+HUMANITY 2/.vs/HUMANITY 2/v17/.futdcache.v2
+HUMANITY 2/.vs/HUMANITY 2/v17/.suo
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.backup.json
+HUMANITY 2/.vs/HUMANITY 2/v17/DocumentLayout.json
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.metadata.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.projects.v9.bin
+HUMANITY 2/.vs/ProjectEvaluation/humanity 2.strings.v9.bin
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.exe
+HUMANITY 2/bin/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/App.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/apphost.exe
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/GeneratedInternalTypeHelper.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfo.cs
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.AssemblyInfoInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.assets.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.CoreCompileInputs.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.csproj.FileListAbsolute.txt
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.GeneratedMSBuildEditorConfig.editorconfig
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.genruntimeconfig.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2.pdb
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.i.cache
+HUMANITY 2/obj/Debug/net9.0-windows/HUMANITY 2_MarkupCompile.lref
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.cs
+HUMANITY 2/obj/Debug/net9.0-windows/MainWindow.g.i.cs
+HUMANITY 2/obj/Debug/net9.0-windows/ref/HUMANITY 2.dll
+HUMANITY 2/obj/Debug/net9.0-windows/refint/HUMANITY 2.dll
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.dgspec.json
+HUMANITY 2/obj/HUMANITY 2.csproj.nuget.g.props
+HUMANITY 2/obj/project.assets.json
+HUMANITY 2/obj/project.nuget.cache

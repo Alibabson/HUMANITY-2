@@ -13,6 +13,17 @@ namespace HumanityWPF.Controller
         private readonly GameModel _model;
         private readonly ItemModel _itemModel;
 
+        // Stany przedmiotów
+        private bool whiteboardPassed = false;
+        private int whiteboardGuesses = 0;
+        private bool whiteboardHint = false;
+
+        private bool poemOpened = false;
+        private bool diaryOpened = false;
+
+        private int currentLogPage = 1;
+        private int currentDiaryPage = 1;
+
         public WPFItemController(GameViewModel viewModel, GameModel model, ItemModel itemModel)
         {
             _viewModel = viewModel;
@@ -26,20 +37,27 @@ namespace HumanityWPF.Controller
             return System.Text.RegularExpressions.Regex.Replace(text, @"\[.*?\]", "");
         }
 
-        private void Clear()
+        // ===== FLOOR/KEY (STAIRS - 1) =====
+        public async Task KeyAsync(List<string> text)
         {
-            _viewModel.ClearOutput();
-        }
+            foreach (var line in text)
+            {
+                _viewModel.AppendOutput(CleanMarkup(line));
+            }
 
-        private async Task AwaitKey()
-        {
+            if (!_model.hasKey)
+            {
+                _model.hasKey = true;
+                _viewModel.AppendOutput("\n🔑 You found a KEY!\n");
+            }
+
             await _viewModel.WaitForKeyPress();
         }
 
         // ===== TERMINAL (LAB - 0) =====
         public async Task Monitor(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput("=== TERMINAL MENU ===\n");
             _viewModel.AppendOutput("1. CHECK CURRENT PATIENT STATUS");
             _viewModel.AppendOutput("2. OPEN TEST LOGS");
@@ -51,12 +69,11 @@ namespace HumanityWPF.Controller
 
             _viewModel.AppendOutput("4. QUIT TERMINAL");
             _viewModel.AppendOutput("\nType the number (1-4) to select option.\n");
-
-            // To będzie obsłużone przez normalny input gracza
         }
 
         public void MonitorOption1() // Status
         {
+            _viewModel.ClearOutput();
             _model.Status();
             foreach (var line in _model.statusLines)
             {
@@ -69,22 +86,24 @@ namespace HumanityWPF.Controller
         {
             if (_model.DEVICE)
             {
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("❌ DATA CORRUPTED.");
                 return;
             }
 
-            _viewModel.AppendOutput("\n=== TEST LOGS ===");
+            _viewModel.ClearOutput();
+            _viewModel.AppendOutput("=== TEST LOGS ===");
             _viewModel.AppendOutput("Use commands: 'next page', 'prev page', 'back'");
             _viewModel.AppendOutput("\nShowing page 1/5...\n");
             ShowLogPage(1);
         }
 
-        private int currentLogPage = 1;
         public void ShowLogPage(int page)
         {
             currentLogPage = page;
             _itemModel.Logs(page);
 
+            _viewModel.ClearOutput();
             foreach (var line in _itemModel.logLines)
             {
                 _viewModel.AppendOutput(CleanMarkup(line));
@@ -92,9 +111,11 @@ namespace HumanityWPF.Controller
             _viewModel.AppendOutput($"\nPage {page}/5 | Commands: 'next page', 'prev page', 'back'");
         }
 
+        public int GetCurrentLogPage() => currentLogPage;
+
         public void MonitorOption3() // Restore Humanity - ENDING
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput("⚠️  WARNING: This action is IRREVERSIBLE.");
             _viewModel.AppendOutput("\nDo you wish to restore your HUMANITY?");
             _viewModel.AppendOutput("This will erase everything.\n");
@@ -103,7 +124,9 @@ namespace HumanityWPF.Controller
 
         public async Task ShowGoodEnding()
         {
-            Clear();
+            _viewModel.ClearOutput();
+            _viewModel.CurrentImage = null; // Pełny ekran tekstu
+
             foreach (var line in _model.EpilogueGood)
             {
                 _viewModel.AppendOutput(CleanMarkup(line.Text));
@@ -117,7 +140,9 @@ namespace HumanityWPF.Controller
 
         public async Task ShowBadEnding()
         {
-            Clear();
+            _viewModel.ClearOutput();
+            _viewModel.CurrentImage = null; // Pełny ekran tekstu
+
             foreach (var line in _model.EpilogueBad)
             {
                 _viewModel.AppendOutput(CleanMarkup(line.Text));
@@ -130,10 +155,6 @@ namespace HumanityWPF.Controller
         }
 
         // ===== WHITEBOARD (LAB - 0) =====
-        private bool whiteboardPassed = false;
-        private int whiteboardGuesses = 0;
-        private bool whiteboardHint = false;
-
         public void Whiteboard(List<string> text)
         {
             if (whiteboardPassed)
@@ -142,15 +163,15 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput(CleanMarkup(text[1]));
-            _viewModel.AppendOutput("\nType 'solve' to attempt solving, or 'leave' to go back.");
+            _viewModel.AppendOutput("\nType 'solve' to attempt solving, or 'back' to leave.");
         }
 
         public void WhiteboardSolve()
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(_itemModel.whiteboardList[0]));
 
             if (whiteboardHint)
@@ -180,10 +201,11 @@ namespace HumanityWPF.Controller
             if (answer == "1")
             {
                 whiteboardPassed = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.whiteboardList[7]));
                 _viewModel.AppendOutput("\n✅ REASON fragment obtained!");
                 _model.Reason = true;
+                ShowStatus("r");
                 return true;
             }
             else
@@ -195,19 +217,10 @@ namespace HumanityWPF.Controller
             }
         }
 
-        // ===== KEY (STAIRS - 1) =====
-        public void Key(List<string> text)
-        {
-            foreach (var line in text)
-            {
-                _viewModel.AppendOutput(CleanMarkup(line));
-            }
-        }
-
         // ===== NEWSPAPER (KITCHEN - 4) =====
         public void Newspaper(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _itemModel.Newspaper();
             var lines = _itemModel.GetNewspaper;
 
@@ -220,30 +233,30 @@ namespace HumanityWPF.Controller
         // ===== BOOKSHELF (LIBRARY - 3) =====
         public void Bookshelf(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(_itemModel.bookshelf[0]));
             _viewModel.AppendOutput("\nType coordinates as 'row column' (e.g., '9 5')");
             _viewModel.AppendOutput("Or type 'back' to leave.\n");
-            _viewModel.AppendOutput("Try: Row 9, Column 5 for something interesting...");
+            _viewModel.AppendOutput("Hint: Row 9, Column 5 has something interesting...");
+            _viewModel.AppendOutput("Hint: Row 4, Column 20 might help you...");
         }
 
-        private bool poemOpened = false;
         public void BookshelfCoordinates(int row, int col, List<string> text)
         {
             if (row == 9 && col == 5)
             {
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(text[0]));
                 _viewModel.AppendOutput("\nType 'read' to read the poem, or 'back' to return.");
             }
             else if (row == 4 && col == 20)
             {
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowNotes()));
             }
             else
             {
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.bookshelf[3]));
             }
         }
@@ -256,7 +269,7 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            Clear();
+            _viewModel.ClearOutput();
             foreach (string s in _itemModel.Poem)
             {
                 _viewModel.AppendOutput(CleanMarkup(s));
@@ -271,7 +284,7 @@ namespace HumanityWPF.Controller
             {
                 poemOpened = true;
                 _model.Reason = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("✅ Correct! REASON fragment obtained!");
                 ShowStatus("r");
                 return true;
@@ -286,7 +299,7 @@ namespace HumanityWPF.Controller
         // ===== TABLE (LIBRARY - 3) =====
         public void Table(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             foreach (string s in text)
             {
                 _viewModel.AppendOutput(CleanMarkup(s));
@@ -296,7 +309,7 @@ namespace HumanityWPF.Controller
         // ===== CLOCK (LIVING ROOM - 2) =====
         public void Clock(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowClock()));
         }
@@ -304,7 +317,7 @@ namespace HumanityWPF.Controller
         // ===== PIANO (LIVING ROOM - 2) =====
         public void Piano(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             if (!_model.hasDiaryKey)
             {
                 _viewModel.AppendOutput(CleanMarkup(text[0]));
@@ -322,10 +335,10 @@ namespace HumanityWPF.Controller
 
         public bool PianoCheckSequence(string sequence)
         {
-            if (sequence.ToLower().Replace(" ", "") == "dafa")
+            if (sequence.ToLower().Replace(" ", "").Replace("-", "") == "dafa")
             {
                 _model.hasDiaryKey = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("🎵 The piano opens!");
                 _viewModel.AppendOutput("✅ You found the DIARY KEY!");
                 return true;
@@ -340,7 +353,7 @@ namespace HumanityWPF.Controller
         // ===== MIRROR & NOTE (BATHROOM - 6) =====
         public void Mirror(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput(CleanMarkup(text[1]));
             _viewModel.AppendOutput("\nType 'read note' to read it, or 'back' to return.");
@@ -348,14 +361,14 @@ namespace HumanityWPF.Controller
 
         public void Note(string text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text));
         }
 
         // ===== CABINET (BATHROOM - 6) =====
         public void Cabinet(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
 
             if (!_model.hasMusicBoxKey)
@@ -373,7 +386,7 @@ namespace HumanityWPF.Controller
             if (!_model.hasMusicBoxKey)
             {
                 _model.hasMusicBoxKey = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(text[3]));
             }
         }
@@ -381,7 +394,7 @@ namespace HumanityWPF.Controller
         // ===== PHOTO & SAFE (HALLWAY - 5) =====
         public void Photo(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _itemModel.Photo();
             var lines = _itemModel.GetPhoto;
 
@@ -400,7 +413,7 @@ namespace HumanityWPF.Controller
 
         public void Safe(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput("\nEnter 5-digit password (or type 'back' to cancel):");
         }
@@ -411,7 +424,7 @@ namespace HumanityWPF.Controller
             {
                 _model.SafeOpened = true;
                 _model.hasDevice = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("✅ Safe opened!");
                 _viewModel.AppendOutput("🔧 You found the DEVICE!");
                 _viewModel.AppendOutput("Use it in the LAB with 'use device'");
@@ -427,7 +440,7 @@ namespace HumanityWPF.Controller
         // ===== MUSIC BOX (BEDROOM - 7) =====
         public void MusicBox(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
 
             if (!_model.hasMusicBoxKey)
             {
@@ -450,15 +463,12 @@ namespace HumanityWPF.Controller
             if (!_model.hasRing)
             {
                 _model.hasRing = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(text[3]));
             }
         }
 
         // ===== DIARY (BEDROOM - 7) =====
-        private bool diaryOpened = false;
-        private int currentDiaryPage = 1;
-
         public void Diary(List<string> text)
         {
             if (diaryOpened)
@@ -469,7 +479,7 @@ namespace HumanityWPF.Controller
 
             if (!_model.hasDiaryKey)
             {
-                Clear();
+                _viewModel.ClearOutput();
                 foreach (var l in text)
                 {
                     _viewModel.AppendOutput(CleanMarkup(l));
@@ -486,13 +496,17 @@ namespace HumanityWPF.Controller
             currentDiaryPage = page;
             _itemModel.DiaryPages(page);
 
-            Clear();
+            _viewModel.ClearOutput();
             foreach (var l in _itemModel.DiaryLines)
             {
                 _viewModel.AppendOutput(CleanMarkup(l));
             }
-            _viewModel.AppendOutput($"\nPage {page}/5 | Commands: 'next page', 'prev page', 'answer'");
+            _viewModel.AppendOutput($"\nPage {page}/5 | Commands: 'next page', 'prev page', 'answer', 'back'");
         }
+
+        public int GetCurrentDiaryPage() => currentDiaryPage;
+
+        public bool IsDiaryOpened() => diaryOpened;
 
         public void DiaryAnswer()
         {
@@ -505,7 +519,7 @@ namespace HumanityWPF.Controller
             {
                 diaryOpened = true;
                 _model.Emotion = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("✅ Correct! EMOTION fragment obtained!");
                 ShowStatus("e");
                 return true;
@@ -520,23 +534,23 @@ namespace HumanityWPF.Controller
         // ===== DESK (OFFICE - 8) =====
         public void Desk(List<string> text)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput("\nType 'desk' to check desk, 'drawer' to check drawer, or 'back' to return.");
         }
 
         public void DeskCheck()
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(_itemModel.Cipher[0]));
         }
 
         public void DrawerCheck()
         {
-            Clear();
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(_itemModel.Cipher[1]));
             _model.KnowsSafeLocation = true;
-            _viewModel.AppendOutput("\n💡 You now know where the safe is!");
+            _viewModel.AppendOutput("\n💡 You now know where the safe is! Check the PHOTO in the HALLWAY.");
         }
 
         // ===== DEVICE (OFFICE - 8) =====
@@ -548,7 +562,7 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            Clear();
+            _viewModel.ClearOutput();
             List<string> text = _itemModel.DestroyList;
             _viewModel.AppendOutput(CleanMarkup(text[0]));
             _viewModel.AppendOutput("\nType 'activate' to proceed, or 'cancel' to go back.");
@@ -556,6 +570,7 @@ namespace HumanityWPF.Controller
 
         public void DestroyActivate(List<string> text)
         {
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[3]));
             _viewModel.AppendOutput(CleanMarkup(text[4]));
             _viewModel.AppendOutput("\nEnter the 4-digit code:");
@@ -581,7 +596,7 @@ namespace HumanityWPF.Controller
             {
                 _model.Morality = true;
                 _model.DEVICE = true;
-                Clear();
+                _viewModel.ClearOutput();
                 _viewModel.AppendOutput("✅ MORALITY fragment obtained!");
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.DestroyList[5]));
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.DestroyList[6]));
@@ -599,7 +614,7 @@ namespace HumanityWPF.Controller
         // ===== STATUS DISPLAY =====
         private void ShowStatus(string fragment)
         {
-            Clear();
+            _viewModel.ClearOutput();
             _model.Status();
             foreach (string line in _model.statusLines)
             {

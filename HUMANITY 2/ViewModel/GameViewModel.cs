@@ -31,7 +31,7 @@ namespace HumanityWPF.ViewModel
             OutputText = "Initializing...";
 
             // Placeholder image (czarne tło)
-            CurrentImage = CreatePlaceholderImage("LABORATORY");
+            CurrentImage = GetRoomImage(0);
         }
 
         // Właściwości publiczne (bindowane do UI)
