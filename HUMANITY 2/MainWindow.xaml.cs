@@ -77,7 +77,7 @@ namespace HumanityWPF
                 _viewModel.InputText = string.Empty;
 
                 // Scroll do dołu output
-                OutputTextBlock.Focus();
+             
                 InputTextBox.Focus();
             }
         }

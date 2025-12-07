@@ -5,58 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HumanityWPF"
         mc:Ignorable="d"
-        Title="HUMANITY" 
+        Title="H U M A N I T Y" 
         Height="800" 
-        Width="1200"
+        Width="1400"
         WindowStartupLocation="CenterScreen"
-        Background="Black"
+        Background="#050505"
         WindowState="Maximized">
 
+    <Window.Resources>
+        <!-- Efekt świecenia dla tekstu -->
+        <Style x:Key="GlowText" TargetType="TextBlock">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#8B0000" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Styl dla przycisków z efektem hover -->
+        <Style x:Key="HorrorButton" TargetType="Button">
+            <Setter Property="Background" Value="#1a0000"/>
+            <Setter Property="Foreground" Value="#cc0000"/>
+            <Setter Property="BorderBrush" Value="#660000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#330000"/>
+                    <Setter Property="BorderBrush" Value="#cc0000"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="#cc0000" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <!-- Główny layout: 3 rzędy (Górny panel, Obraz, Dolny panel) -->
+        <!-- Gradient tła dla głębi -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#050505" Offset="0"/>
+                <GradientStop Color="#0a0000" Offset="0.5"/>
+                <GradientStop Color="#050505" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <!-- Górny panel -->
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
-            <!-- Obraz (reszta miejsca) -->
-            <RowDefinition Height="250"/>
-            <!-- Dolny panel -->
         </Grid.RowDefinitions>
 
-        <!-- GÓRNY PANEL: Pokój + Sanity -->
+        <!-- GÓRNY PANEL: Minimalistyczny, mroczny -->
         <Border Grid.Row="0" 
-                Background="#1a1a1a" 
-                BorderBrush="DarkRed" 
-                BorderThickness="0,0,0,2">
-            <Grid Margin="20,10">
+                Background="#0a0000"
+                BorderBrush="#330000" 
+                BorderThickness="0,0,0,1"
+                Padding="30,15">
+            <Border.Effect>
+                <DropShadowEffect Color="#8B0000" BlurRadius="30" ShadowDepth="0" Opacity="0.3"/>
+            </Border.Effect>
+
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Nazwa pokoju -->
+                <!-- Nazwa pokoju - tajemnicza typografia -->
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="CURRENT ROOM:" 
-                               FontSize="14" 
-                               FontWeight="Bold"
-                               Foreground="Gray"/>
+                    <TextBlock Text="L O C A T I O N" 
+                               FontSize="11" 
+                               FontWeight="Light"
+                               Foreground="#666666"/>
                     <TextBlock Text="{Binding CurrentRoomName}" 
-                               FontSize="28" 
-                               FontWeight="Bold"
-                               Foreground="Cyan"/>
+                               FontSize="32" 
+                               FontWeight="Light"
+                               Foreground="#cccccc"
+                               Margin="0,5,0,0"
+                               Style="{StaticResource GlowText}"/>
                 </StackPanel>
 
-                <!-- Pasek Sanity -->
+                <!-- Pasek Sanity - minimalistyczny -->
                 <StackPanel Grid.Column="1" 
                             VerticalAlignment="Center" 
-                            Width="300">
-                    <TextBlock Text="SANITY:" 
-                               FontSize="14" 
-                               FontWeight="Bold"
-                               Foreground="Gray"
-                               HorizontalAlignment="Left"/>
+                            Width="350">
+                    <TextBlock Text="M E N T A L   S T A T E" 
+                               FontSize="11" 
+                               FontWeight="Light"
+                               Foreground="#666666"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,8"/>
 
-                    <Grid Margin="0,5,0,0">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -64,132 +120,199 @@
 
                         <!-- Pasek postępu -->
                         <Border Grid.Column="0"
-                                Background="#2a2a2a" 
-                                BorderBrush="Gray" 
-                                BorderThickness="2"
-                                CornerRadius="5"
-                                Height="30">
+                                Background="#0a0000" 
+                                BorderBrush="#330000" 
+                                BorderThickness="1"
+                                Height="8">
                             <Grid>
-                                <!-- Wypełnienie paska -->
+                                <!-- Wypełnienie paska z efektem -->
                                 <Border Background="{Binding SanityColor}"
-                                        HorizontalAlignment="Left"
-                                        CornerRadius="3">
+                                        HorizontalAlignment="Left">
                                     <Border.Width>
                                         <MultiBinding Converter="{StaticResource SanityWidthConverter}">
                                             <Binding Path="SanityPercentage"/>
                                             <Binding RelativeSource="{RelativeSource AncestorType=Border}" Path="ActualWidth"/>
                                         </MultiBinding>
                                     </Border.Width>
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="{Binding SanityColor}" 
+                                                        BlurRadius="10" 
+                                                        ShadowDepth="0" 
+                                                        Opacity="0.8"/>
+                                    </Border.Effect>
                                 </Border>
-
-                                <!-- Wartość sanity (tekst na środku) -->
-                                <TextBlock Text="{Binding SanityValue}" 
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Foreground="White"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
                             </Grid>
                         </Border>
 
-                        <!-- "/ 100" obok paska -->
+                        <!-- Wartość numeryczna -->
                         <TextBlock Grid.Column="1"
-                                   Text="/ 100" 
-                                   FontSize="18"
-                                   FontWeight="Bold"
-                                   Foreground="Gray"
-                                   Margin="10,0,0,0"
-                                   VerticalAlignment="Center"/>
+                                   FontSize="16"
+                                   FontWeight="Light"
+                                   Foreground="#999999"
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Consolas">
+                            <Run Text="{Binding SanityValue}"/>
+                            <Run Text="/" Foreground="#444444"/>
+                            <Run Text="100" Foreground="#666666"/>
+                        </TextBlock>
                     </Grid>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <!-- ŚRODEK: Obraz pokoju/przedmiotu -->
-        <Border Grid.Row="1" 
-                Background="Black"
-                BorderBrush="DarkRed" 
-                BorderThickness="0,0,0,2">
-            <Image Source="{Binding CurrentImage}" 
-                   Stretch="Uniform"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-        </Border>
+        <!-- GŁÓWNA ZAWARTOŚĆ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- DOLNY PANEL: Output + Input (styl RPG Maker) -->
-        <Border Grid.Row="2" 
-                Background="#0d0d0d"
-                Padding="20">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <!-- LEWA STRONA: Terminal tekstowy -->
+            <Border Grid.Column="0" 
+                    Background="#000000"
+                    BorderBrush="#1a0000" 
+                    BorderThickness="0,0,1,0"
+                    Padding="30,20,20,30">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="0" Opacity="0.9"/>
+                </Border.Effect>
 
-                <!-- Output text (scroll) -->
-                <ScrollViewer Grid.Row="0" 
-                              VerticalScrollBarVisibility="Auto"
-                              Margin="0,0,0,10">
-                    <TextBlock x:Name="OutputTextBlock"
-                               Text="{Binding OutputText}" 
-                               FontFamily="Consolas"
-                               FontSize="16"
-                               Foreground="LightGray"
-                               TextWrapping="Wrap"
-                               LineHeight="22"/>
-                </ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Input pole + przyciski -->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Pole tekstowe do komend -->
-                    <Border Grid.Column="0"
-                            Background="#1a1a1a"
-                            BorderBrush="DarkRed"
-                            BorderThickness="2"
-                            CornerRadius="5"
-                            Padding="10">
-                        <TextBox x:Name="InputTextBox"
-                                 Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
-                                 FontFamily="Consolas"
-                                 FontSize="18"
-                                 Foreground="Cyan"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 CaretBrush="Cyan"
-                                 KeyDown="InputTextBox_KeyDown"/>
+                    <!-- Output text z efektem CRT -->
+                    <Border Grid.Row="0"
+                            Background="#050505"
+                            BorderBrush="#1a1a1a"
+                            BorderThickness="1"
+                            Padding="15"
+                            Margin="0,0,0,20">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="OutputTextBlock"
+                                       Text="{Binding OutputText}" 
+                                       FontFamily="Consolas"
+                                       FontSize="15"
+                                       Foreground="#b8b8b8"
+                                       TextWrapping="Wrap"
+                                       LineHeight="24"
+                                       Opacity="0.95">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="#00ff00" 
+                                                    BlurRadius="2" 
+                                                    ShadowDepth="0" 
+                                                    Opacity="0.1"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </ScrollViewer>
                     </Border>
 
-                    <!-- Przycisk ENTER -->
-                    <Button Grid.Column="1"
-                            Content="ENTER"
-                            Width="100"
-                            Height="45"
-                            Margin="10,0,0,0"
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Background="DarkRed"
-                            Foreground="White"
-                            BorderThickness="0"
-                            Click="EnterButton_Click"
-                            Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="DarkRed"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Red"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    <!-- Input -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Pole tekstowe -->
+                        <Border Grid.Column="0"
+                                Background="#0a0000"
+                                BorderBrush="#330000"
+                                BorderThickness="1"
+                                Padding="15,12"
+                                Margin="0,0,15,0">
+                            <Grid>
+                                <TextBlock Text="&gt; TYPE COMMAND..."
+                                          FontFamily="Consolas"
+                                          FontSize="16"
+                                          Foreground="#333333"
+                                          VerticalAlignment="Center"
+                                          IsHitTestVisible="False">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding InputText}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <TextBox x:Name="InputTextBox"
+                                         Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                                         FontFamily="Consolas"
+                                         FontSize="16"
+                                         Foreground="#cc9999"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         CaretBrush="#cc0000"
+                                         VerticalAlignment="Center"
+                                         KeyDown="InputTextBox_KeyDown"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Przycisk -->
+                        <Button Grid.Column="1"
+                                Content="E X E C U T E"
+                                Height="48"
+                                FontSize="12"
+                                FontWeight="Normal"
+                                Click="EnterButton_Click"
+                                Cursor="Hand"
+                                Style="{StaticResource HorrorButton}"/>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Border>
+            </Border>
+
+            <!-- PRAWA STRONA: Obraz z efektami -->
+            <Border Grid.Column="1" 
+                    Background="#000000"
+                    Padding="40">
+                <Border BorderBrush="#1a0000" 
+                        BorderThickness="1"
+                        Background="#050505">
+                    <Grid>
+                        <!-- Szum/ziarnistość -->
+                        <Rectangle Fill="#000000" Opacity="0.03">
+                            <Rectangle.OpacityMask>
+                                <DrawingBrush TileMode="Tile" Viewport="0,0,2,2" ViewportUnits="Absolute">
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing Brush="White">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,1,1"/>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+
+                        <!-- Główny obraz -->
+                        <Image Source="{Binding CurrentImage}" 
+                               Stretch="Uniform"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Opacity="0.92">
+                            <Image.Effect>
+                                <DropShadowEffect Color="#000000" 
+                                                BlurRadius="50" 
+                                                ShadowDepth="0" 
+                                                Opacity="1"/>
+                            </Image.Effect>
+                        </Image>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+
+        <!-- Subtelna ramka wokół całego okna -->
+        <Border BorderBrush="#1a0000" 
+                BorderThickness="1" 
+                IsHitTestVisible="False"/>
     </Grid>
 </Window>
