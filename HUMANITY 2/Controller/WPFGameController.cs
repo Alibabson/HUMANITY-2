@@ -17,7 +17,7 @@ namespace HumanityWPF.Controller
         private int nextRoomIdx;
 
         // Stan interakcji - co aktualnie robimy
-        private string _currentInteractionMode = ""; // "" = normalny, "terminal", "whiteboard", "bookshelf", etc.
+        private string _currentInteractionMode = "";
         private string _currentItem = "";
 
         public WPFGameController(GameViewModel viewModel)
@@ -110,6 +110,7 @@ namespace HumanityWPF.Controller
 
                 case "check":
                     _viewModel.ClearOutput();
+                    
                     await HandleCheckCommand(argument);
                     break;
 
@@ -154,8 +155,9 @@ namespace HumanityWPF.Controller
                 return;
             }
 
-            _viewModel.UpdateItemDisplay(item);
+
             _currentItem = item;
+            _viewModel.UpdateItemDisplay(item.ToUpper());
 
             // Obsługa specjalnych przedmiotów
             switch (item.ToLower())
@@ -163,6 +165,7 @@ namespace HumanityWPF.Controller
                 case "floor":
                     if (idx == 1)
                     {
+                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         await _itemController.KeyAsync(desc);
                         _viewModel.UpdateRoomDisplay(1);
                         LookFunction("");
@@ -174,6 +177,7 @@ namespace HumanityWPF.Controller
                 case "terminal":
                     if (idx == 0)
                     {
+                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         await _itemController.Monitor(desc);
                         _currentInteractionMode = "terminal";
                     }
@@ -184,13 +188,17 @@ namespace HumanityWPF.Controller
                     {
                         _itemController.Whiteboard(desc);
                         _currentInteractionMode = "whiteboard_menu";
+                        //LookFunction("");
                     }
                     break;
 
                 case "newspaper":
                     if (idx == 4)
                     {
-                        _itemController.Newspaper(desc);
+                        _viewModel.UpdateItemDisplay(item.ToUpper());
+                        await _itemController.Newspaper(desc);
+                        LookFunction("");
+
                     }
                     break;
 
@@ -205,13 +213,15 @@ namespace HumanityWPF.Controller
                 case "table":
                     if (idx == 3)
                     {
-                        _itemController.Table(desc);
+                        await _itemController.Table(desc);
+                        LookFunction("");
                     }
                     break;
 
                 case "piano":
                     if (idx == 2)
                     {
+                        _viewModel.UpdateItemDisplay(item.ToUpper());
                         _itemController.Piano(desc);
                         if (!_model.hasDiaryKey)
                         {
@@ -223,7 +233,8 @@ namespace HumanityWPF.Controller
                 case "clock":
                     if (idx == 2)
                     {
-                        _itemController.Clock(desc);
+                        await _itemController.Clock(desc);
+                        LookFunction("");
                     }
                     break;
 
@@ -231,7 +242,7 @@ namespace HumanityWPF.Controller
                 case "picture":
                     if (idx == 5)
                     {
-                        _itemController.Photo(desc);
+                        await _itemController.Photo(desc);
                         if (_model.KnowsSafeLocation && !_model.SafeOpened)
                         {
                             _currentInteractionMode = "photo_safe_prompt";
@@ -498,6 +509,7 @@ namespace HumanityWPF.Controller
             {
                 _itemController.Bookshelf(_model.checkItem(3, "bookshelf"));
                 _currentInteractionMode = "bookshelf";
+                _viewModel.ClearOutput();
             }
             else
             {
@@ -516,7 +528,8 @@ namespace HumanityWPF.Controller
             if (_itemController.PianoCheckSequence(input))
             {
                 _currentInteractionMode = "";
-                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                if(_model.hasDiaryKey) _viewModel.UpdateRoomDisplay(_model.room_idx);
+                LookFunction("");
             }
         }
 
@@ -553,12 +566,13 @@ namespace HumanityWPF.Controller
         }
 
         // ===== MIRROR =====
-        private void HandleMirrorInput(string input)
+        private async Task HandleMirrorInput(string input)
         {
             if (input == "read note")
             {
                 var desc = _model.checkItem(6, "mirror");
-                _itemController.Note(desc[5]);
+                await _itemController.Note(desc[5]);
+                _currentInteractionMode = "";
             }
             else if (input == "back")
             {
@@ -569,14 +583,13 @@ namespace HumanityWPF.Controller
         }
 
         // ===== CABINET =====
-        private void HandleCabinetInput(string input)
+        private async Task HandleCabinetInput(string input)
         {
             if (input == "search")
             {
                 var desc = _model.checkItem(6, "cabinet");
-                _itemController.CabinetSearch(desc);
+                await _itemController.CabinetSearch(desc);
                 _currentInteractionMode = "";
-                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
             else if (input == "back")
             {
@@ -587,14 +600,13 @@ namespace HumanityWPF.Controller
         }
 
         // ===== MUSIC BOX =====
-        private void HandleMusicBoxInput(string input)
+        private async Task HandleMusicBoxInput(string input)
         {
             if (input == "open")
             {
                 var desc = _model.checkItem(7, "music box");
-                _itemController.MusicBoxOpen(desc);
+                await _itemController.MusicBoxOpen(desc);
                 _currentInteractionMode = "";
-                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
             else if (input == "back")
             {
@@ -733,13 +745,14 @@ namespace HumanityWPF.Controller
             }
             else
             {
-                _viewModel.AppendOutput("❌ You can't go to that room from here.\n");
+                _viewModel.AppendOutput("\n❌ You can't go to that room from here.\n");
             }
         }
 
         private void NextRoomProcess(int nextRoomIdx)
         {
             _model.GoTo_Possible(nextRoomIdx);
+            _viewModel.ClearOutput();
             _viewModel.AppendOutput($"➡️  You move to the {_model.RoomName(nextRoomIdx)}.\n");
             RandomGhost();
             _viewModel.UpdateRoomDisplay(nextRoomIdx);

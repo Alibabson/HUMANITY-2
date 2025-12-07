@@ -52,6 +52,7 @@ namespace HumanityWPF.Controller
             }
 
             await _viewModel.WaitForKeyPress();
+            _viewModel.ClearOutput();
         }
 
         // ===== TERMINAL (LAB - 0) =====
@@ -160,6 +161,10 @@ namespace HumanityWPF.Controller
             if (whiteboardPassed)
             {
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.whiteboardList[6]));
+                _viewModel.WaitForKeyPress();
+                _viewModel.UpdateRoomDisplay(0);
+                
+                _viewModel.ClearOutput();
                 return;
             }
 
@@ -203,9 +208,10 @@ namespace HumanityWPF.Controller
                 whiteboardPassed = true;
                 _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(_itemModel.whiteboardList[7]));
-                _viewModel.AppendOutput("\n✅ REASON fragment obtained!");
-                _model.Reason = true;
-                ShowStatus("r");
+                //_viewModel.AppendOutput("\n✅ REASON fragment obtained!");
+                //_model.Reason = true;
+                //ShowStatus("r");
+                //_viewModel.WaitForKeyPress();
                 return true;
             }
             else
@@ -218,16 +224,17 @@ namespace HumanityWPF.Controller
         }
 
         // ===== NEWSPAPER (KITCHEN - 4) =====
-        public void Newspaper(List<string> text)
+        public async Task Newspaper(List<string> text)
         {
             _viewModel.ClearOutput();
             _itemModel.Newspaper();
             var lines = _itemModel.GetNewspaper;
 
-            foreach (var x in lines)
-            {
-                _viewModel.AppendOutput(CleanMarkup(x));
-            }
+
+            await _viewModel.WaitForKeyPress();
+            _viewModel.ClearOutput();
+            _viewModel.UpdateRoomDisplay(_model.room_idx);
+            
         }
 
         // ===== BOOKSHELF (LIBRARY - 3) =====
@@ -236,9 +243,9 @@ namespace HumanityWPF.Controller
             _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(_itemModel.bookshelf[0]));
             _viewModel.AppendOutput("\nType coordinates as 'row column' (e.g., '9 5')");
-            _viewModel.AppendOutput("Or type 'back' to leave.\n");
-            _viewModel.AppendOutput("Hint: Row 9, Column 5 has something interesting...");
-            _viewModel.AppendOutput("Hint: Row 4, Column 20 might help you...");
+            //_viewModel.AppendOutput("\nOr type 'back' to leave.\n");
+            //_viewModel.AppendOutput("Hint: Row 9, Column 5 has something interesting...");
+            //_viewModel.AppendOutput("Hint: Row 4, Column 20 might help you...");
         }
 
         public void BookshelfCoordinates(int row, int col, List<string> text)
@@ -297,21 +304,30 @@ namespace HumanityWPF.Controller
         }
 
         // ===== TABLE (LIBRARY - 3) =====
-        public void Table(List<string> text)
+        public async Task Table(List<string> text)
         {
             _viewModel.ClearOutput();
             foreach (string s in text)
             {
                 _viewModel.AppendOutput(CleanMarkup(s));
             }
+
+            await _viewModel.WaitForKeyPress();
+            _viewModel.ClearOutput();
+            _viewModel.UpdateRoomDisplay(_model.room_idx);
         }
 
         // ===== CLOCK (LIVING ROOM - 2) =====
-        public void Clock(List<string> text)
+        public async Task Clock(List<string> text)
         {
             _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text[0]));
-            _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowClock()));
+            // ASCII usuniemy - nie wyświetlamy zegara
+
+            await _viewModel.WaitForKeyPress();
+            _viewModel.ClearOutput();
+            _viewModel.UpdateRoomDisplay(_model.room_idx);
+            
         }
 
         // ===== PIANO (LIVING ROOM - 2) =====
@@ -322,14 +338,16 @@ namespace HumanityWPF.Controller
             {
                 _viewModel.AppendOutput(CleanMarkup(text[0]));
                 _viewModel.AppendOutput(CleanMarkup(text[1]));
-                _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowPiano()));
-                _viewModel.AppendOutput("\n🎹 Play the correct sequence: D-A-F-A");
-                _viewModel.AppendOutput("Type the sequence (e.g., 'dafa') to try:");
+                //_viewModel.AppendOutput(CleanMarkup(_itemModel.ShowPiano()));
+                //_viewModel.AppendOutput("\n🎹 Play the correct sequence: D-A-F-A");
+                _viewModel.AppendOutput("\nType the sequence (e.g., 'cdec') to try:");
             }
             else
             {
                 _viewModel.AppendOutput(CleanMarkup(text[2]));
-                _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowPiano()));
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
+                //while (!PianoCheckSequence("dafa"));
+                // _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowPiano()));
             }
         }
 
@@ -339,13 +357,19 @@ namespace HumanityWPF.Controller
             {
                 _model.hasDiaryKey = true;
                 _viewModel.ClearOutput();
-                _viewModel.AppendOutput("🎵 The piano opens!");
-                _viewModel.AppendOutput("✅ You found the DIARY KEY!");
+                _viewModel.AppendOutput("\n🎵 The piano opens!");
+                _viewModel.AppendOutput("\n✅ You found the DIARY KEY!\n\n");
+                return true;
+            }
+            if (sequence.ToLower() == "back")
+            {
+                _viewModel.ClearOutput();
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
                 return true;
             }
             else
             {
-                _viewModel.AppendOutput("❌ Wrong sequence. Try again.");
+                _viewModel.AppendOutput("\n❌ Wrong sequence. Try again.\n");
                 return false;
             }
         }
@@ -359,10 +383,14 @@ namespace HumanityWPF.Controller
             _viewModel.AppendOutput("\nType 'read note' to read it, or 'back' to return.");
         }
 
-        public void Note(string text)
+        public async Task Note(string text)
         {
             _viewModel.ClearOutput();
             _viewModel.AppendOutput(CleanMarkup(text));
+
+            await _viewModel.WaitForKeyPress();
+            _viewModel.ClearOutput();
+            _viewModel.UpdateRoomDisplay(_model.room_idx);
         }
 
         // ===== CABINET (BATHROOM - 6) =====
@@ -381,18 +409,22 @@ namespace HumanityWPF.Controller
             }
         }
 
-        public void CabinetSearch(List<string> text)
+        public async Task CabinetSearch(List<string> text)
         {
             if (!_model.hasMusicBoxKey)
             {
                 _model.hasMusicBoxKey = true;
                 _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(text[3]));
+
+                await _viewModel.WaitForKeyPress();
+                _viewModel.ClearOutput();
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
         }
 
         // ===== PHOTO & SAFE (HALLWAY - 5) =====
-        public void Photo(List<string> text)
+        public async Task Photo(List<string> text)
         {
             _viewModel.ClearOutput();
             _itemModel.Photo();
@@ -402,12 +434,18 @@ namespace HumanityWPF.Controller
             {
                 _viewModel.AppendOutput(CleanMarkup(lines[i]));
             }
-            _viewModel.AppendOutput(CleanMarkup(_itemModel.ShowPhoto()));
+            // Bez ASCII photo - będziemy mieć grafikę
 
             if (_model.KnowsSafeLocation && !_model.SafeOpened)
             {
                 _viewModel.AppendOutput("\n" + CleanMarkup(text[0]));
                 _viewModel.AppendOutput("\nType 'open safe' to try opening it, or 'back' to return.");
+            }
+            else
+            {
+                await _viewModel.WaitForKeyPress();
+                _viewModel.ClearOutput();
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
         }
 
@@ -458,13 +496,17 @@ namespace HumanityWPF.Controller
             }
         }
 
-        public void MusicBoxOpen(List<string> text)
+        public async Task MusicBoxOpen(List<string> text)
         {
             if (!_model.hasRing)
             {
                 _model.hasRing = true;
                 _viewModel.ClearOutput();
                 _viewModel.AppendOutput(CleanMarkup(text[3]));
+
+                await _viewModel.WaitForKeyPress();
+                _viewModel.ClearOutput();
+                _viewModel.UpdateRoomDisplay(_model.room_idx);
             }
         }
 

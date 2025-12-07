@@ -117,7 +117,7 @@ namespace HumanityWPF.ViewModel
         // Metody pomocnicze
         public void AppendOutput(string text)
         {
-            OutputText += text + "\n";
+            OutputText += text;
         }
 
         public void ClearOutput()
@@ -154,7 +154,7 @@ namespace HumanityWPF.ViewModel
         public void UpdateItemDisplay(string itemName)
         {
             // Zmiana obrazu na przedmiot
-            CurrentImage = GetItemImage(itemName);
+            CurrentImage = GetItemImage(itemName.ToUpper());
         }
 
         // Tworzenie placeholder obrazów (tymczasowe, póki nie masz grafik)
@@ -246,11 +246,14 @@ namespace HumanityWPF.ViewModel
                 return CreatePlaceholderImage("UNKNOWN");
 
             string cleaned = itemName.Replace(" ", "");
-            var img = TryLoadImageByCandidates(cleaned);
+            var img = TryLoadImageByCandidates(cleaned.ToUpper());
             if (img != null) return img;
 
-            System.Diagnostics.Debug.WriteLine($"All image load attempts failed for item '{itemName}'. Returning placeholder.");
-            return CreatePlaceholderImage(itemName.ToUpper());
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"All image load attempts failed for item '{itemName}'. Returning placeholder.");
+                return CreatePlaceholderImage(itemName.ToUpper());
+            }
         }
 
         // INotifyPropertyChanged implementation

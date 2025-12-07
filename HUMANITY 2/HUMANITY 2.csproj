@@ -16,6 +16,8 @@
     <None Remove="Assety\Grafika\LABORATORY.png" />
     <None Remove="Assety\Grafika\LIBRARY.png" />
     <None Remove="Assety\Grafika\LIVINGROOM.png" />
+    <None Remove="Assety\Grafika\NEWSPAPER.png" />
+    <None Remove="Assety\Grafika\PIANO.png" />
     <None Remove="Assety\Grafika\STAIRS.png" />
   </ItemGroup>
 
@@ -36,6 +38,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assety\Grafika\LIVINGROOM.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\newspaper.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assety\Grafika\PIANO.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assety\Grafika\STAIRS.png">
