@@ -1,0 +1,29 @@
+﻿<Window x:Class="HumanityWPF.ModeSelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HUMANITY - wybór trybu" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="Black">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="20">
+            <TextBlock Text="Wybierz wersję gry"
+                       Foreground="White"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <Button Content="Tryb graficzny (WPF)"
+                    Name="GraphicButton"
+                    Width="200"
+                    Margin="0,0,0,10"
+                    Click="GraphicButton_Click"/>
+
+            <Button Content="Tryb tekstowy (konsola)"
+                    Name="TextButton"
+                    Width="200"
+                    Click="TextButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
