@@ -39,7 +39,7 @@ namespace HumanityWPF
             try
             {
                 System.Diagnostics.Process.Start(
-                    @"C:\Users\DELL\Desktop\Humanity\bin\Debug\net8.0\Humanity.exe"
+                    @"F:\PULPIT\Humanity\bin\Debug\net8.0\Humanity.exe"
                 );
 
                 // opcjonalnie zamknij WPF, jeśli chcesz zostawić tylko konsolę

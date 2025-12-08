@@ -1,29 +1,131 @@
 ﻿<Window x:Class="HumanityWPF.ModeSelectWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="HUMANITY - wybór trybu" Height="400" Width="600"
+        Title="H U M A N I T Y" 
+        Height="800" 
+        Width="1200"
         WindowStartupLocation="CenterScreen"
-        Background="Black">
+        Background="#050505"
+        WindowStyle="None"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Efekt świecenia dla tekstu -->
+        <Style x:Key="GlowText" TargetType="TextBlock">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#8B0000" BlurRadius="15" ShadowDepth="0" Opacity="0.8"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Styl dla przycisków z efektem hover -->
+        <Style x:Key="HorrorButton" TargetType="Button">
+            <Setter Property="Background" Value="#1a0000"/>
+            <Setter Property="Foreground" Value="#cc0000"/>
+            <Setter Property="BorderBrush" Value="#660000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#330000"/>
+                    <Setter Property="BorderBrush" Value="#cc0000"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="#cc0000" BlurRadius="20" ShadowDepth="0" Opacity="0.6"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <!-- Gradient tła dla głębi -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#050505" Offset="0"/>
+                <GradientStop Color="#0a0000" Offset="0.5"/>
+                <GradientStop Color="#050505" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Główny kontener wyśrodkowany -->
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Margin="20">
-            <TextBlock Text="Wybierz wersję gry"
-                       Foreground="White"
-                       FontSize="24"
+                    Width="500">
+
+            <!-- Tytuł -->
+            <TextBlock Text="S E L E C T   M O D E"
+                       FontSize="36"
+                       FontWeight="Light"
+                       Foreground="#cccccc"
                        HorizontalAlignment="Center"
-                       Margin="0,0,0,20"/>
+                       Margin="0,0,0,20"
+                       Style="{StaticResource GlowText}"/>
 
-            <Button Content="Tryb graficzny (WPF)"
-                    Name="GraphicButton"
-                    Width="200"
-                    Margin="0,0,0,10"
-                    Click="GraphicButton_Click"/>
+            <!-- Podtytuł -->
+            <TextBlock Text="C H O O S E   Y O U R   E X P E R I E N C E"
+                       FontSize="11"
+                       FontWeight="Light"
+                       Foreground="#666666"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,60"/>
 
-            <Button Content="Tryb tekstowy (konsola)"
-                    Name="TextButton"
-                    Width="200"
-                    Click="TextButton_Click"/>
+            <!-- Przycisk - Tryb graficzny -->
+            <Button Name="GraphicButton"
+                    Content="G R A P H I C   M O D E   ( W P F )"
+                    Margin="0,0,0,20"
+                    Click="GraphicButton_Click"
+                    Style="{StaticResource HorrorButton}"/>
+
+            <!-- Przycisk - Tryb tekstowy -->
+            <Button Name="TextButton"
+                    Content="T E X T   M O D E   ( C O N S O L E )"
+                    Click="TextButton_Click"
+                    Style="{StaticResource HorrorButton}"/>
+
+            <!-- Informacja dodatkowa -->
+            <TextBlock Text=".--. .-. --- ... .. -- -.-- / --- / ..... "
+                       FontFamily="Georgia"
+                       FontSize="14"
+                       FontStyle="Italic"
+                       Foreground="#444444"
+                       HorizontalAlignment="Center"
+                       Margin="0,40,0,0"
+                       Opacity="0.7"/>
         </StackPanel>
+
+        <!-- Subtelna ramka wokół całego okna -->
+        <Border BorderBrush="#1a0000" 
+                BorderThickness="1" 
+                IsHitTestVisible="False"/>
+
+        <!-- Stopka z informacją o studio -->
+        <TextBlock Text="OnyxMoonStar Studio"
+                   FontFamily="Georgia"
+                   FontSize="14"
+                   FontStyle="Italic"
+                   Foreground="#333333"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,30"/>
     </Grid>
 </Window>

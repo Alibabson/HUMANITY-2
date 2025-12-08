@@ -45,7 +45,7 @@
                        Foreground="#888888"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10"/>
-            <TextBlock Text="made by OnyxMoonShine Studios"
+            <TextBlock Text="made by OnyxMoonStar Studio"
                        FontFamily="Georgia"
                        FontSize="18"
                        FontStyle="Italic"
